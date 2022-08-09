@@ -1,0 +1,50 @@
+.speakBox .editor-container {
+    padding-bottom: 10px;
+    /* border-bottom: 8px solid var(--twitter-background); */
+    margin-right: 16px;
+    margin-left: 16px;
+    margin-bottom: 10px;
+    max-width: 610px;
+    /* border-left: 1px solid white; 
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;  */
+}
+
+.speakBox {
+    margin: 20px auto 20px auto;
+    max-width: 610px;
+    
+}
+
+/* .toolbar {
+    border-top: 1px solid white;
+    border-left: 1px solid white; 
+    border-right: 1px solid white; 
+
+} */
+
+[data-test-id=image-modal-option-sample] {
+    display: none;
+}
+
+.image-caption-button {
+    display: none !important;
+}
+
+.add-comment {
+    display: none !important;
+}
+
+.speak .editor-img {
+    width: 100% !important;
+}
+
+.speak img {
+    max-width: 100% !important;
+    width: inherit !important;
+    /* height: inherit !important; */
+}
+
+.MuiPaper-root {
+    overflow: visible !important;
+}

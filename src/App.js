@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import VEditor from "./Components/VEditor";
+import ViewPost from "./Components/ViewPost";
+import Feed from "./Components/Feed";
+import SignIn from "./Components/SignIn";
+import "./App.css";
+// import "./Styles/8.bit-blue.css";
 
-function App() {
+// function useForceUpdate() {
+//   const [value, setValue] = useState(0);
+//   return () => setValue((value) => value + 1);
+// }
+
+const App = () => {
+  const [value, setValue] = useState(0);
+  const [wizard, setWizard] = useState(null);
+
+  const forceUpdate = () => {
+    setValue((value) => value + 1);
+  };
+  if (!wizard) {
+    return <SignIn setWizard={setWizard} />;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="speak">
+      <VEditor key={value} update={forceUpdate} wizard={wizard} />
+      <Feed updateDependency={value} />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,51 @@
+.viewPost {
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+.viewPost-container .editor-shell {
+    margin-top: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.viewPost .editor-container {
+    margin-bottom: 0;
+    max-width: 610px;
+}
+
+.viewPost .ContentEditable__root {
+    min-height: 20px;
+    border: 0;
+    resize: none;
+    cursor: default;
+    font-size: 15px;
+    display: block;
+    position: relative;
+    tab-size: 1;
+    outline: 0;
+    padding: 0px;
+    overflow: auto;
+    resize: none;
+}
+
+.viewPost-container {
+    margin: 20px auto 20px auto;
+    padding: 0;
+    max-width: 610px;
+}
+
+.editor-image {
+    max-width: 610px;
+}
+
+.viewPost img {
+    max-width: 100% !important;
+    height: inherit !important;
+}
+
+.viewPost iframe {
+    max-width: 100% !important;
+}
