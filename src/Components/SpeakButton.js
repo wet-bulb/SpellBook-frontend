@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -10,11 +10,8 @@ import { $nodesOfType } from "lexical";
 import { HashtagNode } from "@lexical/hashtag";
 
 const SpeakButton = (props) => {
-  // const { canUndo } = useContext(ToolbarContext);
-
   const [editor] = useLexicalComposerContext();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async () => {
     const state = editor.getEditorState();
@@ -22,16 +19,17 @@ const SpeakButton = (props) => {
       return $nodesOfType(HashtagNode);
     });
     const content = JSON.stringify(state);
-    const wizard = props.wizard.name;
+    const wizard = props.wizard;
+    const tavern = props.tavern;
     console.log(tags);
     if (state._nodeMap.size !== 2) {
       if (!loading) {
-        setSuccess(false);
         setLoading(true);
         return axios
           .post("http://localhost:8080/posts", {
             content,
             wizard,
+            tavern,
           })
           .then((response) => {
             console.log(response);
@@ -47,9 +45,9 @@ const SpeakButton = (props) => {
   return (
     <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
       <Box sx={{ m: 1, position: "relative" }}>
-        <Button disabled={loading} variant="contained" onClick={handleSubmit}>
+        <Button disabled={loading} onClick={handleSubmit}>
           {" "}
-          Post{" "}
+          Cast{" "}
         </Button>
         {loading && (
           <CircularProgress

@@ -6,17 +6,29 @@
   margin-right: auto;
 }
 
+
 body {
-  /* background-color: grey; */
-  font-family: 'Source Code Pro', monospace;
+  /* min-height: 100vh; */
 }
 
-.feed {
+.speak {
+
   margin: 20px auto 20px auto;
   max-width: 610px;
 
+
 }
+/* .feed {
+  margin: 20px auto 20px auto;
+  max-width: 610px;
+
+} */
 /* .speak {
   max-width: 600px;
   
 } */
+
+i, .icon {
+
+filter: invert(39%) sepia(33%) saturate(1075%) hue-rotate(245deg) brightness(101%) contrast(83%);
+}

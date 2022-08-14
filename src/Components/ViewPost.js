@@ -1,35 +1,49 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import { Temporal } from "@js-temporal/polyfill";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import { EditorComposer, Editor } from "verbum";
 import "../Styles/ViewPost.css";
 
 export default function ViewPost(props) {
+  const current = Temporal.Now.plainDateTimeISO();
+  const timestamp = Temporal.PlainDateTime.from(props.timestamp);
+  const min = current.since(timestamp).minutes;
+  const hour = current.since(timestamp).hours;
+  const day = current.since(timestamp).days;
+  const display =
+    (day && `${day}d`) || (hour && `${hour}h`) || (min && `${min}m`) || "now";
+
   return (
     <div className="viewPost-container">
       <Card
-        // variant="outlined"
-        sx={{ maxWidth: 610, padding: 0, borderRadius: "10px" }}
+        variant="outlined"
+        sx={{
+          maxWidth: 610,
+          padding: 0,
+          borderRadius: "10px",
+          borderColor: "primary.dark",
+        }}
       >
         <CardHeader
           sx={{ paddingBottom: 0 }}
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            <Avatar
+              src={props.wizard.avatar}
+              sx={{ bgcolor: "primary.dark" }}
+              aria-label="post"
+            >
               R
             </Avatar>
           }
-          title={props.wizard}
-          titleTypographyProps={{ fontFamily: "monospace" }}
-          subheader="19hr"
+          title={props.wizard.name}
+          titleTypographyProps={{
+            fontFamily: "monospace",
+            color: "secondary.dark",
+          }}
+          subheader={display}
           subheaderTypographyProps={{ fontFamily: "monospace" }}
         />
 
@@ -44,14 +58,6 @@ export default function ViewPost(props) {
             </div>
           </EditorComposer>
         </CardContent>
-        <CardActions sx={{ margin: 0, padding: 0 }} disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
       </Card>
     </div>
   );

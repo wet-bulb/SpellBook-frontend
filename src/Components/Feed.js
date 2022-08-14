@@ -4,10 +4,11 @@ import ViewPost from "./ViewPost";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Skeleton from "@mui/material/Skeleton";
+import { Typography } from "@mui/material";
 
-const getAllPostsAsync = (page) => {
+const getAllPostsAsync = (tavernId, page) => {
   return axios
-    .get(`http://localhost:8080/posts?page=${page}`)
+    .get(`http://localhost:8080/taverns/${tavernId}/posts?page=${page}`)
     .then((response) => {
       return response.data;
     })
@@ -23,7 +24,7 @@ const Feed = (props) => {
   const [hasMore, setHasMore] = useState(true);
 
   const updatePosts = () => {
-    getAllPostsAsync(0)
+    getAllPostsAsync(props.tavern.id, 0)
       .then((newPage) => {
         setPostData(newPage.content);
         setHasMore(!newPage.last);
@@ -35,7 +36,7 @@ const Feed = (props) => {
   };
 
   const getNextPage = () => {
-    getAllPostsAsync(currentPage + 1)
+    getAllPostsAsync(props.tavern.id, currentPage + 1)
       .then((newPage) => {
         setPostData((oldData) => [...oldData, ...newPage.content]);
         setHasMore(!newPage.last);
@@ -57,6 +58,7 @@ const Feed = (props) => {
         id={post.id}
         wizard={post.wizard}
         content={post.content}
+        timestamp={post.timestamp}
       />
     );
   });
@@ -64,13 +66,13 @@ const Feed = (props) => {
   return (
     <div className="feed">
       <InfiniteScroll
-        dataLength={postData.length} //This is important field to render the next data
+        dataLength={postData.length}
         next={getNextPage}
         hasMore={hasMore}
         loader={
           <div>
             <Skeleton
-              sx={{ margin: "20px auto 20px auto" }}
+              sx={{ margin: "20px auto 20px auto", borderRadius: "10px" }}
               variant="rectangular"
               height="150px"
             />
@@ -91,7 +93,7 @@ const Feed = (props) => {
             <b>Your scrying mirror comes up empty.</b>
           </p>
         }
-        // below props only if you need pull down functionality
+        // pull down functionality
         refreshFunction={updatePosts}
         pullDownToRefresh
         pullDownToRefreshThreshold={50}
@@ -102,6 +104,9 @@ const Feed = (props) => {
           <h1 style={{ textAlign: "center" }}>&#8593; Release to refresh</h1>
         }
       >
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
+          {props.tavern.name}
+        </Typography>
         <div>{postComponents}</div>
       </InfiniteScroll>
     </div>

@@ -5,23 +5,30 @@
     margin-left: 16px;
     margin-bottom: 10px;
     max-width: 610px;
-    /* border-left: 1px solid white; 
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;  */
+    margin-left: 75px;
+    
 }
 
 .speakBox {
-    margin: 20px auto 20px auto;
+    margin: 0 auto 20px auto;
     max-width: 610px;
     
 }
 
-/* .toolbar {
-    border-top: 1px solid white;
-    border-left: 1px solid white; 
-    border-right: 1px solid white; 
+.speakBox .ContentEditable__root {
+    min-height: 50px;
+}
 
-} */
+.toolbar {
+    background: inherit !important;
+    box-sizing: initial !important;
+    padding: 4px 0 4px 0 !important;
+
+}
+
+.divider {
+    background: inherit !important;
+}
 
 [data-test-id=image-modal-option-sample] {
     display: none;
@@ -47,4 +54,8 @@
 
 .MuiPaper-root {
     overflow: visible !important;
+}
+
+select.toolbar-item.font-size{
+    padding-left: 0;
 }

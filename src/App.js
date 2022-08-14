@@ -1,32 +1,112 @@
 import React from "react";
 import { useState } from "react";
 import VEditor from "./Components/VEditor";
-import ViewPost from "./Components/ViewPost";
+import InviteOverlay from "./Components/InviteOverlay";
 import Feed from "./Components/Feed";
+import ButtonAppBar from "./Components/AppBar";
 import SignIn from "./Components/SignIn";
 import "./App.css";
-// import "./Styles/8.bit-blue.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import "./Styles/PlaygroundEditorTheme.css";
+import { Button } from "@mui/material";
+import { randomWizardName } from "wizard_name_generator";
+import "./Styles/EditorComposer.css";
+import axios from "axios";
 
-// function useForceUpdate() {
-//   const [value, setValue] = useState(0);
-//   return () => setValue((value) => value + 1);
-// }
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    type: "dark",
+    primary: {
+      main: "#a856b5",
+    },
+    secondary: {
+      main: "#63b556",
+    },
+  },
+  typography: {
+    fontFamily: "monospace",
+  },
+});
+
+const wizardsTower = {
+  id: 1,
+  name: "The Wizards Tower",
+};
 
 const App = () => {
   const [value, setValue] = useState(0);
-  const [wizard, setWizard] = useState(null);
+  const [wizard, setWizard] = useState(
+    JSON.parse(localStorage.getItem("wizard"))
+  );
+  const [tavern, setTavern] = useState(wizardsTower);
 
   const forceUpdate = () => {
     setValue((value) => value + 1);
   };
-  if (!wizard) {
-    return <SignIn setWizard={setWizard} />;
-  }
+
+  const onInviteClose = () => {
+    setWizard(JSON.parse(localStorage.getItem("wizard")));
+  };
+
+  const handleLogout = () => {
+    setTavern(wizardsTower);
+    localStorage.setItem("wizard", false);
+    setWizard(false);
+  };
+
+  const handleTavernChange = (tavern) => {
+    setTavern(tavern);
+    forceUpdate();
+  };
+
+  const handleAddTavern = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    return axios
+      .post(`http://localhost:8080/wizards/${wizard.id}/taverns`, {
+        id: 1,
+        name: data.get("tavern"),
+      })
+      .then((result) =>
+        setWizard((oldData) => ({
+          ...oldData,
+          taverns: [...oldData.taverns, result.data],
+        }))
+      );
+  };
+
   return (
-    <div className="speak">
-      <VEditor key={value} update={forceUpdate} wizard={wizard} />
-      <Feed updateDependency={value} />
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      {!wizard && <SignIn setWizard={setWizard} />}
+
+      {wizard && (
+        <div className="speak">
+          <ButtonAppBar
+            wizard={wizard}
+            handleLogout={handleLogout}
+            handleTavernChange={handleTavernChange}
+            handleAddTavern={handleAddTavern}
+            wizardsTower={wizardsTower}
+          />
+
+          {/* <div className="speak"> */}
+          <VEditor
+            key={value}
+            update={forceUpdate}
+            wizard={wizard}
+            tavern={tavern}
+          />
+          <Feed updateDependency={value} tavern={tavern} />
+        </div>
+      )}
+      {wizard.invites && (
+        <InviteOverlay onClose={onInviteClose} wizard={wizard} />
+      )}
+      {/* <link rel="stylesheet" href="./Styles/EditorComposer.css" /> */}
+    </ThemeProvider>
   );
 };
 

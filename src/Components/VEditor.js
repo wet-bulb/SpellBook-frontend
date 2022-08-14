@@ -4,14 +4,11 @@ import {
   ToolbarPlugin,
   AlignDropdown,
   BoldButton,
-  FloatingLinkEditor,
-  FontFamilyDropdown,
   FontSizeDropdown,
   InsertDropdown,
   InsertLinkButton,
   ItalicButton,
   UnderlineButton,
-  Divider,
 } from "verbum";
 
 import { useRef } from "react";
@@ -25,18 +22,21 @@ const NoteViewer = (props) => {
   return (
     <div className="speakBox">
       <Card
-        raised={true}
-        // variant="outlined"
+        variant="outlined"
         sx={{
           maxWidth: 610,
-          paddingTop: -20,
+          paddingTop: "51px",
           borderRadius: "10px",
+          borderColor: "secondary.dark",
+          borderTop: "none",
+          borderTopRightRadius: "0",
+          borderTopLeftRadius: "0",
         }}
       >
         <EditorComposer>
           <Editor
             initialEditorState={undefined}
-            placeholder={"Speak friend..."}
+            placeholder={"Incantation awaits..."}
             hashtagsEnabled={true}
             autoLinkEnabled={true}
             emojisEnabled={true}
@@ -46,20 +46,16 @@ const NoteViewer = (props) => {
               defaultFontFamily="Courier New"
               defaultFontSize="20px"
             >
-              {/* <FontFamilyDropdown /> */}
               <FontSizeDropdown />
-              {/* <Divider /> */}
               <BoldButton />
               <ItalicButton />
               <UnderlineButton />
               <InsertLinkButton />
-              {/* <Divider /> */}
               <InsertDropdown
                 enablePoll={false}
                 enableYoutube={true}
                 enableHorizontalRule={true}
               />
-              {/* <Divider /> */}
               <AlignDropdown />
             </ToolbarPlugin>
           </Editor>
@@ -67,6 +63,7 @@ const NoteViewer = (props) => {
             update={props.update}
             state={editorStateRef}
             wizard={props.wizard}
+            tavern={props.tavern}
           />
         </EditorComposer>
       </Card>

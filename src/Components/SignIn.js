@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,11 +7,8 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { faHatWizard } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import spelltome from "../Assets/spelltome.png";
 import axios from "axios";
-
 function Copyright(props) {
   return (
     <Typography
@@ -22,8 +18,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Spelltome
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -31,10 +27,9 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
-
 export default function SignIn(props) {
   const [status, setStatus] = useState(null);
+  const [error, setError] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,63 +42,62 @@ export default function SignIn(props) {
       .get(`http://localhost:8080/wizards?name=${data.get("wizard")}`)
       .then((wizard) => {
         if (!wizard.data) {
-          setStatus("invalid");
+          setStatus("Invalid");
+          setError(true);
         } else if (wizard.data.active) {
-          setStatus("active");
+          setStatus("Active");
+          setError(true);
         } else {
           setStatus("success");
           props.setWizard(wizard.data);
+          localStorage.setItem("wizard", JSON.stringify(wizard.data));
         }
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <FontAwesomeIcon icon={faHatWizard} />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img alt="" src={spelltome} />
+        {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <FontAwesomeIcon icon={faHatWizard} />
+        </Avatar> */}
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            error={error}
+            margin="normal"
+            required
+            fullWidth
+            id={error ? "outlined-error-helper-text" : "wizard"}
+            label={error ? "Error" : "Wizard Name"}
+            helperText={error ? `${status} wizard.` : null}
+            name="wizard"
+            autoComplete="wizard"
+            autoFocus
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="wizard"
-              label="Wizard Name"
-              name="wizard"
-              autoComplete="wizard"
-              autoFocus
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-          </Box>
+            EVOKE WIZARD
+          </Button>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 }
