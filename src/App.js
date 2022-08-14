@@ -9,10 +9,10 @@ import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./Styles/PlaygroundEditorTheme.css";
-import { Button } from "@mui/material";
-import { randomWizardName } from "wizard_name_generator";
 import "./Styles/EditorComposer.css";
 import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const darkTheme = createTheme({
   palette: {
@@ -65,7 +65,7 @@ const App = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     return axios
-      .post(`http://localhost:8080/wizards/${wizard.id}/taverns`, {
+      .post(`/wizards/${wizard.id}/taverns`, {
         id: 1,
         name: data.get("tavern"),
       })
@@ -92,7 +92,6 @@ const App = () => {
             wizardsTower={wizardsTower}
           />
 
-          {/* <div className="speak"> */}
           <VEditor
             key={value}
             update={forceUpdate}

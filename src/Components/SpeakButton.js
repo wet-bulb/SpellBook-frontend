@@ -26,7 +26,7 @@ const SpeakButton = (props) => {
       if (!loading) {
         setLoading(true);
         return axios
-          .post("http://localhost:8080/posts", {
+          .post(`/posts`, {
             content,
             wizard,
             tavern,

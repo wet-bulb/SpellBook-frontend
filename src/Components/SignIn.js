@@ -35,11 +35,9 @@ export default function SignIn(props) {
     event.preventDefault();
     setStatus("loading");
     const data = new FormData(event.currentTarget);
-    console.log({
-      wizard: data.get("wizard"),
-    });
+    console.log(process.env.REACT_APP_BASE_URL);
     return axios
-      .get(`http://localhost:8080/wizards?name=${data.get("wizard")}`)
+      .get(`/wizards?name=${data.get("wizard")}`)
       .then((wizard) => {
         if (!wizard.data) {
           setStatus("Invalid");

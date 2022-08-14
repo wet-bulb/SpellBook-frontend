@@ -10,7 +10,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import { Tooltip } from "@mui/material";
 import { randomWizardName } from "wizard_name_generator";
 import { tavern } from "fantastical";
 import axios from "axios";
@@ -41,7 +40,7 @@ const InviteOverlay = (props) => {
 
   const setInvitesFalse = () => {
     return axios
-      .patch(`http://localhost:8080/wizards/invites?id=${wizardId}&bool=false`)
+      .patch(`/wizards/invites?id=${wizardId}&bool=false`)
       .then((result) =>
         localStorage.setItem("wizard", JSON.stringify(result.data))
       )
@@ -50,7 +49,7 @@ const InviteOverlay = (props) => {
 
   const postThreeWizards = () => {
     return axios
-      .post("http://localhost:8080/wizards/invites", {
+      .post(`/wizards/invites`, {
         id: wizardId,
         names: wizardNamesList.current,
       })
@@ -61,7 +60,7 @@ const InviteOverlay = (props) => {
 
   const addOneTavern = () => {
     return axios
-      .post(`http://localhost:8080/wizards/${wizardId}/taverns`, {
+      .post(`/wizards/${wizardId}/taverns`, {
         id: 0,
         name: tavernName.current,
       })
@@ -76,7 +75,7 @@ const InviteOverlay = (props) => {
 
   const handleClose = () => {
     return axios
-      .patch(`http://localhost:8080/wizards/invites?id=${wizardId}&bool=false`)
+      .patch(`/wizards/invites?id=${wizardId}&bool=false`)
       .then((result) => onClose(result.data))
       .catch((err) => console.log(err));
   };

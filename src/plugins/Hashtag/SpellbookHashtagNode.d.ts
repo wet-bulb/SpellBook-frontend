@@ -5,16 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type { EditorConfig, LexicalNode, NodeKey, SerializedTextNode } from 'lexical';
+import type { EditorConfig, LexicalNode, NodeKey } from 'lexical';
+import type { SerializedLinkNode } from '@lexical/link'
+import { LinkNode } from '@lexical/link'
 import { TextNode } from 'lexical';
-export declare class HashtagNode extends TextNode {
+export declare class HashtagNode extends LinkNode {
     static getType(): string;
     static clone(node: HashtagNode): HashtagNode;
     constructor(text: string, key?: NodeKey);
-    createDOM(config: EditorConfig): HTMLElement;
-    static importJSON(serializedNode: SerializedTextNode): HashtagNode;
-    exportJSON(): SerializedTextNode;
-    canInsertTextBefore(): boolean;
+    createDOM(config: EditorConfig): HTMLAnchorElement;
+    static importJSON(serializedNode: SerializedLinkNode): HashtagNode;
+    exportJSON(): SerializedLinkNode;
+    canInsertTextBefore(): false;
     isTextEntity(): true;
 }
 export declare function $createHashtagNode(text?: string): HashtagNode;
