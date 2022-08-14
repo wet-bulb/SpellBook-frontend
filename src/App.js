@@ -103,7 +103,7 @@ const App = () => {
           <Feed updateDependency={value} tavern={tavern} />
         </div>
       )}
-      {wizard.invites && (
+      {wizard && wizard.invites && (
         <InviteOverlay onClose={onInviteClose} wizard={wizard} />
       )}
       {/* <link rel="stylesheet" href="./Styles/EditorComposer.css" /> */}
