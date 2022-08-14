@@ -8,7 +8,7 @@ import { EditorComposer, Editor } from "verbum";
 import "../Styles/ViewPost.css";
 
 export default function ViewPost(props) {
-  const current = Temporal.Now.plainDateTimeISO();
+  const current = Temporal.Now.plainDateTimeISO("UTC");
   const timestamp = Temporal.PlainDateTime.from(props.timestamp);
   const min = current.since(timestamp).minutes;
   const hour = current.since(timestamp).hours;
