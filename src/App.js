@@ -69,12 +69,14 @@ const App = () => {
         id: 1,
         name: data.get("tavern"),
       })
-      .then((result) =>
-        setWizard((oldData) => ({
-          ...oldData,
-          taverns: [...oldData.taverns, result.data],
-        }))
-      );
+      .then((result) => {
+        const newWizard = {
+          ...wizard,
+          taverns: [...wizard.taverns, result.data],
+        };
+        setWizard(newWizard);
+        localStorage.setItem("wizard", JSON.stringify(newWizard));
+      });
   };
 
   return (

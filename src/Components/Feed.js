@@ -7,7 +7,6 @@ import Skeleton from "@mui/material/Skeleton";
 import { Typography } from "@mui/material";
 
 const getAllPostsAsync = (tavernId, page) => {
-  console.log(process.env.REACT_APP_BASE_URL);
   return axios
     .get(`/taverns/${tavernId}/posts?page=${page}`)
     .then((response) => {

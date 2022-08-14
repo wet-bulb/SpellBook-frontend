@@ -95,7 +95,10 @@ export default function AccountMenu(props) {
         </MenuItem>
         {tavernComponents}
         <Divider />
-        <AddTavern handleAddTavern={props.handleAddTavern} />
+        <AddTavern
+          handleAddTavern={props.handleAddTavern}
+          wizard={props.wizard}
+        />
         <MenuItem onClick={props.handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
