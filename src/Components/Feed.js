@@ -47,6 +47,7 @@ const Feed = (props) => {
       });
   };
 
+  // ignore this dependency issue..
   useEffect(() => {
     updatePosts();
   }, [props.updateDependency]);
