@@ -19,7 +19,7 @@
 }
 
 .editor-shell .editor-container {
-  background: inherit;
+  background: inherit !important;
   position: relative;
   cursor: text;
   display: block;
