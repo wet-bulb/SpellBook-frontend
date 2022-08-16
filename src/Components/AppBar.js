@@ -19,17 +19,14 @@ export default function ButtonAppBar(props) {
       <AppBar
         position="fixed"
         elevation={0}
-        color="transparent"
-        enableColorOnDark={true}
         sx={{
-          backgroundColor: "background.default",
+          backgroundColor: "#121212f2",
         }}
       >
         <Box display="flex" justifyContent="center">
           <Paper
             variant="outlined"
             sx={{
-              // margin: "0 auto 0 auto",
               width: "100%",
               maxWidth: "610px",
               borderColor: "secondary.dark",
@@ -44,11 +41,6 @@ export default function ButtonAppBar(props) {
                 <Typography variant="h6">HOME</Typography>
               </Button>
               <Box component="div" sx={{ flexGrow: 1 }} />
-              {/* <Avatar
-                src={props.wizard.avatar}
-                variant="large"
-                sx={{ width: 60, height: 60, bgcolor: "primary.dark" }}
-              /> */}
               <AccountMenu
                 wizard={props.wizard}
                 handleLogout={props.handleLogout}

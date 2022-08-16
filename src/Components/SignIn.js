@@ -66,9 +66,6 @@ export default function SignIn(props) {
         }}
       >
         <img alt="" src={spelltome} />
-        {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <FontAwesomeIcon icon={faHatWizard} />
-        </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>

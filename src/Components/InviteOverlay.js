@@ -35,9 +35,6 @@ const InviteOverlay = (props) => {
   const wizardNamesList = useRef(wizardNames());
   const tavernName = useRef(tavern());
 
-  // wizardNamesList.current = ;
-  // tavernName.current = tavern();
-
   const setInvitesFalse = () => {
     return axios
       .patch(`/wizards/invites?id=${wizardId}&bool=false`)

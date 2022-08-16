@@ -59,3 +59,21 @@
 select.toolbar-item.font-size{
     padding-left: 0;
 }
+
+.Modal__modal {
+    background-color: #121212;
+}
+
+.Input__input {
+    background-color: inherit;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.character-style-popup, button.item, div.dropdown {
+    background: #121212 !important;
+}
+
+span.text.dropdown-button-text {
+    display: none !important;
+}
