@@ -61,7 +61,7 @@ select.toolbar-item.font-size{
 }
 
 .Modal__modal {
-    background-color: #121212;
+    background-color: #121212 !important;
 }
 
 .Input__input {
