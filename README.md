@@ -10,6 +10,7 @@ This project is the front-end to Spelltome, a MUD-inspired rouguelike social med
 ## Setup
 
 1. Clone the application
-2. Configure REACT_APP_BASE_URL in .env to point to the Spelltome-backend API host
-3. Start the application with npm start
+2. Install dependencies with npm install
+3. Configure REACT_APP_BASE_URL in .env to point to the Spelltome-backend API host
+4. Start the application with npm start
 
