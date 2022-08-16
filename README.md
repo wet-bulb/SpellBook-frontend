@@ -1,6 +1,6 @@
 # Spelltome
 
-This project is the front-end to Spelltome, a MUD-inspired rouguelike social media webapp powered by React.js and [`lexical`](https://github.com/facebook/lexical) framework. Built for the C17 Ada Developer's Academy capstone. See backend [`here`](https://github.com/wet-bulb/Spelltome-Backend).
+This project is the front-end to Spelltome, a MUD-inspired rouguelike social media webapp powered by Spring Boot, React.js and [`lexical`](https://github.com/facebook/lexical) framework. Built for the C17 Ada Developer's Academy capstone. See backend [`here`](https://github.com/wet-bulb/Spelltome-Backend).
 
 ## Dependencies
 
